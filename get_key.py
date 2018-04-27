@@ -25,4 +25,12 @@ def init_data(xs, Flag=1):
                 rds.set(service + ':' + jiekou + ':keywords', config.get(jiekou, 'keywords'))
                 rds.set(service + ':' + jiekou + ':status', '00000')
                 rds.set(service + ':' + jiekou + ':sendflag', 1)
+    elif Flag == 2:
+        key_list = []
+        for key in rds.scan(match='*sendflag*', count=1000)[1]:
+            key_list.append(key)
+        print key_list
+
     return service_data
+
+init_data('a', Flag=2)
